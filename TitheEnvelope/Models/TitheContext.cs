@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TitheEnvelopeApi.Models;
 
 namespace TitheEnvelope.Models
 {
@@ -11,7 +12,9 @@ namespace TitheEnvelope.Models
         public TitheContext(DbContextOptions<TitheContext> options): base(options)
         {
         }
-        public DbSet<TitheObject> TitheObjects { get; set; }
+        public DbSet<TithePaymentDetail> TithePaymentDetail { get; set; }
+
+        public DbSet<TitherDetail> TitherDetail { get; set; }
 
     }
 }
