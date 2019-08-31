@@ -11,10 +11,16 @@ namespace TitheEnvelope.Models
     {
         public TitheContext(DbContextOptions<TitheContext> options): base(options)
         {
+            Database.Migrate();
         }
         public DbSet<TithePaymentDetail> TithePaymentDetail { get; set; }
 
         public DbSet<TitherDetail> TitherDetail { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TithePaymentDetail>().HasOne(b => b.TitherDetail).WithMany(a => a.TithePaymentDetails).OnDelete(DeleteBehavior.SetNull);
+        }
 
     }
 }

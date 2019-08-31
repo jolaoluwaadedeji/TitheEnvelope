@@ -30,10 +30,11 @@ namespace TitheEnvelopeApi.Models
         [Display(Name = "PaymentMethod")]
         public string PaymentMethod { get; set; }
 
-        [Required]
         [Column(TypeName = "bigint")]
-        [Display(Name = "TitherNo")]
-        public long TitherNo { get; set; }
+        [Display(Name = "TitherDetailId")]
+        public long TitherDetailId { get; set; }
+
+        public TitherDetail TitherDetail { get; set; }
 
     }
 }
