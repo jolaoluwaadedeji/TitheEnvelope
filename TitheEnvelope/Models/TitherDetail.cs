@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TitheEnvelopeApi.Models
 {
     [Table("TitherDetail", Schema ="dbo")]
-    public class TitherDetail
+    public class TitherDetail: BaseObject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -10,10 +10,14 @@ namespace TitheEnvelopeApi.Models
     public class BaseObject
     {
         [Column(TypeName = "datetime")]
-        public DateTime DateUpdated { get; set; } 
+        public DateTime ? DateUpdated { get; set; } 
 
         [Required]
         [Column(TypeName = "datetime")]
         public DateTime DateInserted { get; set; } = DateTime.Now;
+
+        [Required]
+        [Column(TypeName = "bit")]
+        public bool IsDeleted { get; set; } 
     }
 }

@@ -6,28 +6,29 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TitheEnvelope.Models;
+using TitheEnvelopeApi.Models;
 
 namespace TitheEnvelope.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TitheObjectsController : ControllerBase
+    public class TitherDetailController : ControllerBase
     {
         private readonly TitheContext _context;
 
-        public TitheObjectsController(TitheContext context)
+        public TitherDetailController(TitheContext context)
         {
             _context = context;
         }
 
-        // GET: api/TitheObjects
+        // GET: api/TitherDetail
         [HttpGet]
-        public IEnumerable<TitheObject> GetTitheObjects()
+        public IEnumerable<TitherDetail> GetTitherDetail()
         {
-            return _context.TitheObjects;
+            return _context.TitherDetail;
         }
 
-        // GET: api/TitheObjects/5
+        // GET: api/TitherDetail/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTitheObject([FromRoute] long id)
         {
@@ -36,7 +37,7 @@ namespace TitheEnvelope.Controllers
                 return BadRequest(ModelState);
             }
 
-            var titheObject = await _context.TitheObjects.FindAsync(id);
+            var titheObject = await _context.TitherDetail.FindAsync(id);
 
             if (titheObject == null)
             {
@@ -46,21 +47,21 @@ namespace TitheEnvelope.Controllers
             return Ok(titheObject);
         }
 
-        // PUT: api/TitheObjects/5
+        // PUT: api/TitherDetail/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTitheObject([FromRoute] long id, [FromBody] TitheObject titheObject)
+        public async Task<IActionResult> PutTitheObject([FromRoute] long id, [FromBody] TitherDetail titherDetail)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != titheObject.Id)
+            if (id != titherDetail.TitherDetailId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(titheObject).State = EntityState.Modified;
+            _context.Entry(titherDetail).State = EntityState.Modified;
 
             try
             {
@@ -81,22 +82,22 @@ namespace TitheEnvelope.Controllers
             return NoContent();
         }
 
-        // POST: api/TitheObjects
+        // POST: api/TitherDetail
         [HttpPost]
-        public async Task<IActionResult> PostTitheObject([FromBody] TitheObject titheObject)
+        public async Task<IActionResult> PostTitherDetail([FromBody] TitherDetail titherDetail)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.TitheObjects.Add(titheObject);
+            _context.TitherDetail.Add(titherDetail);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTitheObject", new { id = titheObject.Id }, titheObject);
+            return CreatedAtAction("GetTitheObject", new { id = titherDetail.TitherDetailId }, titherDetail);
         }
 
-        // DELETE: api/TitheObjects/5
+        // DELETE: api/TitherDetail/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTitheObject([FromRoute] long id)
         {
@@ -105,13 +106,13 @@ namespace TitheEnvelope.Controllers
                 return BadRequest(ModelState);
             }
 
-            var titheObject = await _context.TitheObjects.FindAsync(id);
+            var titheObject = await _context.TitherDetail.FindAsync(id);
             if (titheObject == null)
             {
                 return NotFound();
             }
 
-            _context.TitheObjects.Remove(titheObject);
+            _context.TitherDetail.Remove(titheObject);
             await _context.SaveChangesAsync();
 
             return Ok(titheObject);
@@ -119,7 +120,7 @@ namespace TitheEnvelope.Controllers
 
         private bool TitheObjectExists(long id)
         {
-            return _context.TitheObjects.Any(e => e.Id == id);
+            return _context.TitherDetail.Any(e => e.TitherDetailId == id);
         }
     }
 }

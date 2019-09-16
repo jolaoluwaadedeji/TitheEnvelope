@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TitheEnvelopeApi.Models
 {
     [Table("TithePaymentDetail", Schema ="dbo")]
-    public class TithePaymentDetail
+    public class TithePaymentDetail:BaseObject
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,7 +32,7 @@ namespace TitheEnvelopeApi.Models
 
         [Column(TypeName = "bigint")]
         [Display(Name = "TitherDetailId")]
-        public long TitherDetailId { get; set; }
+        public long ? TitherDetailId { get; set; }
 
         public TitherDetail TitherDetail { get; set; }
 
