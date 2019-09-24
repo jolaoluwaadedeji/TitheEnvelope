@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TitheEnvelopeApi.Models
+namespace TitheEnvelopeApi.Models.DTO
 {
     public class BaseObject
     {

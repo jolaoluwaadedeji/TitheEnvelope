@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TitheEnvelopeApi.Models
+namespace TitheEnvelopeApi.Models.DTO
 {
     [Table("TithePaymentDetail", Schema ="dbo")]
     public class TithePaymentDetail:BaseObject
