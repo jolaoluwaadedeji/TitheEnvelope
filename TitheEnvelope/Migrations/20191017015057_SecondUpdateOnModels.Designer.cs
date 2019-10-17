@@ -10,8 +10,8 @@ using TitheEnvelope.DAL.Models;
 namespace TitheEnvelopeApi.Migrations
 {
     [DbContext(typeof(TitheContext))]
-    [Migration("20190901190408_TitheEnvelope.Models.TitheContextForBaseObject")]
-    partial class TitheEnvelopeModelsTitheContextForBaseObject
+    [Migration("20191017015057_SecondUpdateOnModels")]
+    partial class SecondUpdateOnModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace TitheEnvelopeApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TitheEnvelopeApi.Models.TithePaymentDetail", b =>
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TithePaymentDetail", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,15 +36,17 @@ namespace TitheEnvelopeApi.Migrations
                     b.Property<DateTime>("DateOfPayment")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<long?>("TitherDetailId")
-                        .HasColumnType("bigint");
+                    b.Property<long?>("TitherDetailId");
 
                     b.HasKey("Id");
 
@@ -53,30 +55,33 @@ namespace TitheEnvelopeApi.Migrations
                     b.ToTable("TithePaymentDetail","dbo");
                 });
 
-            modelBuilder.Entity("TitheEnvelopeApi.Models.TitherDetail", b =>
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TitherDetail", b =>
                 {
-                    b.Property<long>("TitherDetailId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateInserted")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NameOfTither")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.HasKey("TitherDetailId");
+                    b.HasKey("Id");
 
                     b.ToTable("TitherDetail","dbo");
                 });
 
-            modelBuilder.Entity("TitheEnvelopeApi.Models.TithePaymentDetail", b =>
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TithePaymentDetail", b =>
                 {
-                    b.HasOne("TitheEnvelopeApi.Models.TitherDetail", "TitherDetail")
+                    b.HasOne("TitheEnvelopeApi.Models.DTO.TitherDetail", "TitherDetail")
                         .WithMany("TithePaymentDetails")
                         .HasForeignKey("TitherDetailId")
                         .OnDelete(DeleteBehavior.SetNull);

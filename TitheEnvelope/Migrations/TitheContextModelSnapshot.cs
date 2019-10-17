@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TitheEnvelope.Models;
+using TitheEnvelope.DAL.Models;
 
 namespace TitheEnvelopeApi.Migrations
 {
@@ -19,7 +19,7 @@ namespace TitheEnvelopeApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TitheEnvelopeApi.Models.TithePaymentDetail", b =>
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TithePaymentDetail", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,23 +44,18 @@ namespace TitheEnvelopeApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
-                    b.Property<long?>("TitherDetailId")
-                        .HasColumnType("bigint");
+                    b.Property<long?>("TitherDetailId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TitherDetailId");
 
                     b.ToTable("TithePaymentDetail","dbo");
-
-                    b.HasData(
-                        new { Id = 1L, Amount = 100m, DateInserted = new DateTime(2019, 9, 13, 20, 5, 0, 511, DateTimeKind.Local), DateOfPayment = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), IsDeleted = false, PaymentMethod = "Cash", TitherDetailId = 1L }
-                    );
                 });
 
-            modelBuilder.Entity("TitheEnvelopeApi.Models.TitherDetail", b =>
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TitherDetail", b =>
                 {
-                    b.Property<long>("TitherDetailId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -77,14 +72,14 @@ namespace TitheEnvelopeApi.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.HasKey("TitherDetailId");
+                    b.HasKey("Id");
 
                     b.ToTable("TitherDetail","dbo");
                 });
 
-            modelBuilder.Entity("TitheEnvelopeApi.Models.TithePaymentDetail", b =>
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TithePaymentDetail", b =>
                 {
-                    b.HasOne("TitheEnvelopeApi.Models.TitherDetail", "TitherDetail")
+                    b.HasOne("TitheEnvelopeApi.Models.DTO.TitherDetail", "TitherDetail")
                         .WithMany("TithePaymentDetails")
                         .HasForeignKey("TitherDetailId")
                         .OnDelete(DeleteBehavior.SetNull);

@@ -4,17 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TitheEnvelopeApi.Models.DTO.Interface;
 
 namespace TitheEnvelopeApi.Models.DTO
 {
     [Table("TithePaymentDetail", Schema ="dbo")]
-    public class TithePaymentDetail:BaseObject
+    public class TithePaymentDetail:BaseObject, IEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name ="TithePaymentId")]
-        public long Id { get; set; }
-        
+               
         [Required]
         [Column(TypeName = "datetime")]
         [Display(Name = "DateOfPayment")]
@@ -30,9 +27,9 @@ namespace TitheEnvelopeApi.Models.DTO
         [Display(Name = "PaymentMethod")]
         public string PaymentMethod { get; set; }
 
-        [Column(TypeName = "bigint")]
-        [Display(Name = "TitherDetailId")]
-        public long ? TitherDetailId { get; set; }
+        //[Column(TypeName = "bigint")]
+        //[Display(Name = "TitherDetailId")]
+        //public long ? TitherDetailId { get; set; }
 
         public TitherDetail TitherDetail { get; set; }
 

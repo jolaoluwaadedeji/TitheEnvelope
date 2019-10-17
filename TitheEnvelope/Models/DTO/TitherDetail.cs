@@ -10,10 +10,10 @@ namespace TitheEnvelopeApi.Models.DTO
     [Table("TitherDetail", Schema ="dbo")]
     public class TitherDetail: BaseObject
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "TitherDetailId")]
-        public long TitherDetailId { get; set; }
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[Display(Name = "TitherDetailId")]
+        //public long TitherDetailId { get; set; }
 
         [Required]
         [Column(TypeName = "varchar(100)")]

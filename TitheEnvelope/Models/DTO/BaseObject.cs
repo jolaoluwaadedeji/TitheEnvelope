@@ -4,11 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using TitheEnvelopeApi.Models.DTO.Interface;
 
 namespace TitheEnvelopeApi.Models.DTO
 {
-    public class BaseObject
+    public class BaseObject: IEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Id")]
+        public long Id { get; set; }
+
         [Column(TypeName = "datetime")]
         public DateTime ? DateUpdated { get; set; } 
 

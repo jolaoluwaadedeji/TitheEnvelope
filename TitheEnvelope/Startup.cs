@@ -11,7 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TitheEnvelope.Models;
+using TitheEnvelope.DAL.Models;
+using TitheEnvelopeApi.Models.DTO.Abstract;
+using TitheEnvelopeApi.Models.DTO.Interface;
 
 namespace TitheEnvelope
 {
@@ -29,6 +31,7 @@ namespace TitheEnvelope
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<TitheContext>(opt => opt.UseSqlServer(Configuration["ConnectionString:TitheDB"]));
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
