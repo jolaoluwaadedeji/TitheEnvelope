@@ -26,6 +26,16 @@ namespace TitheEnvelope.DAL.Models
             //    Amount = 100M,TitherDetailId = 1, DateInserted = DateTime.Now,PaymentMethod = "Cash",
             //    DateOfPayment = new DateTime(2019,9,12,0,0,0),IsDeleted = false, Id = 1
             //});
+            modelBuilder.Entity<UserRole>()
+            .HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId);
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.RoleId);
         }
 
     }

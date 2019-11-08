@@ -19,6 +19,30 @@ namespace TitheEnvelopeApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.Role", b =>
+                {
+                    b.Property<long>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateInserted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Role","dbo");
+                });
+
             modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TithePaymentDetail", b =>
                 {
                     b.Property<long>("Id")
@@ -77,12 +101,66 @@ namespace TitheEnvelopeApi.Migrations
                     b.ToTable("TitherDetail","dbo");
                 });
 
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.User", b =>
+                {
+                    b.Property<long>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateInserted")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("User","dbo");
+                });
+
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.UserRole", b =>
+                {
+                    b.Property<long>("UserId");
+
+                    b.Property<long>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRole","dbo");
+                });
+
             modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.TithePaymentDetail", b =>
                 {
                     b.HasOne("TitheEnvelopeApi.Models.DTO.TitherDetail", "TitherDetail")
                         .WithMany("TithePaymentDetails")
                         .HasForeignKey("TitherDetailId")
                         .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("TitheEnvelopeApi.Models.DTO.UserRole", b =>
+                {
+                    b.HasOne("TitheEnvelopeApi.Models.DTO.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TitheEnvelopeApi.Models.DTO.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

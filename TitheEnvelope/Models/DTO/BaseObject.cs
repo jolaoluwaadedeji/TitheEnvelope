@@ -8,13 +8,9 @@ using TitheEnvelopeApi.Models.DTO.Interface;
 
 namespace TitheEnvelopeApi.Models.DTO
 {
-    public class BaseObject: IEntity
+    public class BaseObject
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "Id")]
-        public long Id { get; set; }
-
+        
         [Column(TypeName = "datetime")]
         public DateTime ? DateUpdated { get; set; } 
 

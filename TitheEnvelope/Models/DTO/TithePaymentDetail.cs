@@ -11,7 +11,11 @@ namespace TitheEnvelopeApi.Models.DTO
     [Table("TithePaymentDetail", Schema ="dbo")]
     public class TithePaymentDetail:BaseObject, IEntity
     {
-               
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Id")]
+        public long Id { get; set; }
+
         [Required]
         [Column(TypeName = "datetime")]
         [Display(Name = "DateOfPayment")]
